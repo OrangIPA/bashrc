@@ -116,7 +116,7 @@ function __setprompt
 	# Show error exit code if there is one
 	if [[ $LAST_COMMAND != 0 ]]; then
 		# PS1="\[${RED}\](\[${LIGHTRED}\]ERROR\[${RED}\])-(\[${LIGHTRED}\]Exit Code \[${WHITE}\]${LAST_COMMAND}\[${RED}\])-(\[${LIGHTRED}\]"
-		PS1="\[${DARKGRAY}\](\[${LIGHTRED}\]ERROR\[${DARKGRAY}\])-(\[${RED}\]Exit Code \[${LIGHTRED}\]${LAST_COMMAND}\[${DARKGRAY}\])-(\[${RED}\]"
+		PS1="\[${YELLOW}\](\[${LIGHTRED}\]ERROR\[${YELLOW}\])-(\[${RED}\]Exit Code \[${LIGHTRED}\]${LAST_COMMAND}\[${YELLOW}\])-(\[${RED}\]"
 		if [[ $LAST_COMMAND == 1 ]]; then
 			PS1+="General error"
 		elif [ $LAST_COMMAND == 2 ]; then
@@ -193,11 +193,12 @@ function __setprompt
 	PS4='\[${DARKGRAY}\]+\[${NOCOLOR}\] '
 }
 
+PROMPT_COMMAND='__setprompt'
+
 #######################################################
 # Application Defined
 #######################################################
 
-PROMPT_COMMAND='__setprompt'
 . "$HOME/.cargo/env"
 
 eval "$(thefuck --alias)"
