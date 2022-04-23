@@ -88,7 +88,8 @@ alias lla="ls -a -l"
 # Set the ultimate amazing command prompt
 #######################################################
 
-# alias cpu="grep 'cpu ' /proc/stat | awk '{usage=(\$2+\$4)*100/(\$2+\$4+\$5)} END {print usage}' | awk '{printf(\"%.1f\n\", \$1)}'"
+source ~/.git-prompt.sh
+
 function __setprompt
 {
 	local LAST_COMMAND=$? # Must come first!
@@ -169,13 +170,19 @@ function __setprompt
 	# Current directory
 	PS1+="\[${YELLOW}\] \[${LIGHTCYAN}\]\w\[${YELLOW}\]]"
 
+	# Git branch name
+	PS1+="\[${YELLOW}\]$(__git_ps1 ' [')"
+	PS1+="\[${GREEN}\]$(__git_ps1 'git: ')"
+	PS1+="\[${LIGHTCYAN}\]$(__git_ps1 '(%s)')"
+	PS1+="\[${YELLOW}\]$(__git_ps1 ']')"
+
 	# Skip to the next line
 	PS1+="\n"
 
 	if [[ $EUID -ne 0 ]]; then
-		PS1+="\[${GREEN}\]$\[${NOCOLOR}\] " # Normal user
+		PS1+="\[${GREEN}\]\$\[${NOCOLOR}\] " # Normal user
 	else
-		PS1+="\[${RED}\]#\[${NOCOLOR}\] " # Root user
+		PS1+="\[${RED}\]\$\[${NOCOLOR}\] " # Root user
 	fi
 
 	# PS2 is used to continue a command using the \ character
