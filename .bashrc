@@ -155,16 +155,14 @@ function __setprompt
 		PS1=""
 	fi
 
-	# Date
-	PS1+="\[${YELLOW}\][\[${CYAN}\]\d\[${YELLOW}\]] \[${YELLOW}\]["
-
 	# User and server
+	PS1+="\[${YELLOW}\][\[${GREEN}\]\H\[${YELLOW}\]@"
 	local SSH_IP=`echo $SSH_CLIENT | awk '{ print $1 }'`
 	local SSH2_IP=`echo $SSH2_CLIENT | awk '{ print $1 }'`
 	if [ $SSH2_IP ] || [ $SSH_IP ] ; then
-		PS1+="\[${GREEN}\]\H\[${YELLOW}\]@\[${RED}\]\u@\h"
+		PS1+="\[${RED}\]\u@\h"
 	else
-		PS1+="\[${GREEN}\]\H\[${YELLOW}\]@\[${RED}\]\u"
+		PS1+="\[${RED}\]\u"
 	fi
 
 	# Current directory
